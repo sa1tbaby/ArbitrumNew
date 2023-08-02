@@ -1,0 +1,28 @@
+AlchManager.engine_create : 2023-08-02 06:09:10,396 : INFO
+operation was successfully finished
+Engine(postgresql+psycopg2://cesium:***@192.168.1.148:5432/arbitrum_db_1)
+
+AlchManager._execute_context : 2023-08-02 06:09:10,404 : INFO
+select pg_catalog.version()
+AlchManager._execute_context : 2023-08-02 06:09:10,404 : INFO
+[raw sql] {}
+AlchManager._execute_context : 2023-08-02 06:09:10,405 : INFO
+select current_schema()
+AlchManager._execute_context : 2023-08-02 06:09:10,405 : INFO
+[raw sql] {}
+AlchManager._execute_context : 2023-08-02 06:09:10,405 : INFO
+show standard_conforming_strings
+AlchManager._execute_context : 2023-08-02 06:09:10,405 : INFO
+[raw sql] {}
+AlchManager._connection_begin_impl : 2023-08-02 06:09:10,405 : INFO
+BEGIN (implicit)
+AlchManager._execute_context : 2023-08-02 06:09:10,406 : INFO
+SELECT api_keys.id AS api_keys_id, api_keys.ticker AS api_keys_ticker, api_keys.public AS api_keys_public, api_keys.private AS api_keys_private 
+FROM api_keys
+AlchManager._execute_context : 2023-08-02 06:09:10,406 : INFO
+[generated in 0.00010s] {}
+AlchManager._execute_context : 2023-08-02 06:09:10,407 : INFO
+SELECT api_keys.id AS api_keys_id, api_keys.ticker AS api_keys_ticker, api_keys.public AS api_keys_public, api_keys.private AS api_keys_private 
+FROM api_keys
+AlchManager._execute_context : 2023-08-02 06:09:10,407 : INFO
+[cached since 0.0008446s ago] {}
