@@ -1,0 +1,11 @@
+{
+  "dialect": "postgresql",
+  "driver": "psycopg2",
+  "username": "cesium",
+  "password": "user",
+  "host": "192.168.1.148",
+  "port": "5432",
+  "database": "",
+  "engine_echo": true,
+  "engine_pool_size": 5
+}
