@@ -1,15 +1,59 @@
-from sqlalchemy import create_engine as alch_create_engine
+from sqlalchemy import create_engine
 from sqlalchemy.orm import Session, sessionmaker
+from sqlalchemy.engine.base import Engine
 from os.path import abspath as path_abspath
 from Models.ConfigModels import ConfigDB
 import logging
 
+from json import load
+import os.path
+
+
+class BaseDB:
+
+    def __init__(
+            self
+    ):
+        self._config = self.getConfig()
+
+    def getConfig(
+            self,
+            config_path: str = 'Configs',
+            config_name: str = 'ConfigDB.json'
+    ):
+        cur_dir = os.path.abspath(os.path.curdir)
+        config_path = os.path.join(cur_dir, config_path, config_name)
+
+        with open(config_path, 'r') as file:
+            self._config = ConfigDB(**load(file))
+
+        return self._config
+
+
+class CreateEngine(BaseDB):
+
+    def getEngine(self) -> Engine:
+        return create_engine(
+            url=self._getConnStr(),
+            echo=self._config.engine_echo,
+            pool_size=self._config.engine_pool_size
+        )
+
+    def _getConnStr(self) -> str:
+        return (f'{self._config.dialect}+'
+                f'{self._config.driver}://'
+                f'{self._config.username}:'
+                f'{self._config.password}@'
+                f'{self._config.host}:'
+                f'{self._config.port}/'
+                f'{self._config.database}')
+
+
+
+
+
 
 class AlchManager:
-    """
-
-
-    """
 
     def __init__(
             self,
@@ -23,13 +67,7 @@ class AlchManager:
                       engine_create_echo,
                       engine_create_pool_size):
         try:
-            engine_connect_string = f'{self._config.dialect}+' \
-                             f'{self._config.driver}://' \
-                             f'{self._config.username}:' \
-                             f'{self.__alch_password}@' \
-                             f'{self._config.host}:' \
-                             f'{self._config.port}/' \
-                             f'{self._config.database}'
+
 
             engine = alch_create_engine(url=engine_connect_string,
                                         echo=engine_create_echo,

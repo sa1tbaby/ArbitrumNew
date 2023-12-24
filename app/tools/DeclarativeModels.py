@@ -5,8 +5,6 @@ from decimal import Decimal
 class BaseStock(DeclarativeBase):
     ticker: Mapped[str] = mapped_column(primary_key=True)
     price_avg: Mapped[Decimal] = mapped_column(DECIMAL)
-    dom_for_sale: Mapped[dict] = mapped_column(JSON)
-    dom_for_buy: Mapped[dict] = mapped_column(JSON)
 
 
 class BinanceStock(BaseStock):
@@ -35,3 +33,7 @@ class BitFinexStock(BaseStock):
 
 class BitForexStock(BaseStock):
     __tablename__ = "bitforex_stock"
+
+
+class Tickers(DeclarativeBase):
+    __tablename__ = "tickers_stock"
